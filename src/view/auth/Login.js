@@ -4,7 +4,7 @@ import { API_URL } from "@env";
 import { AuthContext } from '../../service/AuthContext';
 const Example = () => {
 
-    const [numero_child, setnumero_child] = useState('999999999');
+    const [numero_child, setnumero_child] = useState('');
     const [cargando, setcargando] = useState(false);
     const toast = useToast();
     const { signIn } = useContext(AuthContext);
@@ -27,7 +27,7 @@ const Example = () => {
                     })
                 });
                 const data = await res.json();
-                // console.log(data)
+                console.log(data)
                 if (data.errors) {
                     Object.entries(data.errors).forEach(([key, value]) => {
                         toast.show({ 'description': value.toString() })

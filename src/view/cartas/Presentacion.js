@@ -17,7 +17,6 @@ export default function Presentacion({ navigation, route }) {
                 estado === 'Respondida' ? (
                     <View>
                         <HStack space={2} my={3}>
-                            <CheckIcon size="5" mt="0.5" color="emerald.500" />
                             <Text color="emerald.500" fontSize="md">
                                 Carta ya fue respondida.!
                             </Text>

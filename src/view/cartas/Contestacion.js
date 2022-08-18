@@ -56,7 +56,7 @@ export default function Contestacion({ navigation, route }) {
                     { name: 'respuesta', data: texto.toString() },
                 ]);
                 const result = await res.json();
-                
+                console.log(result)
                 if (result.errors) {
                     var errores = "";
                     Object.entries(result.errors).forEach(([key, value]) => {
@@ -98,7 +98,7 @@ export default function Contestacion({ navigation, route }) {
                 estado === 'Respondida' ? (
                     <View>
                         <HStack space={2} my={3}>
-                            <CheckIcon size="5" mt="0.5" color="emerald.500" />
+                            
                             <Text color="emerald.500" fontSize="md">
                                 Carta ya fue respondida.!
                             </Text>
@@ -119,7 +119,7 @@ export default function Contestacion({ navigation, route }) {
                                     setcantidadTexto(580 - (val.slice(0, -1).length));
 
                                 }} maxLength={580} multiline={true} editable={true} placeholder="Redacte aquí ..." />
-                                <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                                <FormControl.ErrorMessage>
                                     {cantidadTexto}
                                 </FormControl.ErrorMessage>
                             </FormControl>

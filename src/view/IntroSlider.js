@@ -13,14 +13,14 @@ const data = [
         bg: '#0369a1',
     },
     {
-        title: 'Con el apoyo técnico \ny financiamiento de:',
+        title: '',
         text: 'Misión.\nAyudar a los niños y niñas que viven en condiciones de carencia, exclusión y vulnerabilidad a tener la capacidad de mejorar sus vidas para ser personas que generen cambios positivos y duraderos en sus comunidades.',
         image: require('../public/img/2.png'),
         bg: '#047857',
     },
     {
         title: 'PRESENTA',
-        text: "Aplicación muy simples para,\n recibir y escribir fácilmente una carta.",
+        text: "Aplicación simple para\n recibir y escribir fácilmente una carta.",
         image: require('../public/img/3.png'),
         bg: '#22bcb5',
     },

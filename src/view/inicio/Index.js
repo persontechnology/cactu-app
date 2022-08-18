@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { RefreshControl } from "react-native";
-import { Pressable, Text, Alert, Box, VStack, HStack, Spacer, Flex, Badge, useToast, CheckIcon, ScrollView, View, WarningTwoIcon } from "native-base";
+import { Pressable, Text, Alert, Box, VStack, HStack, Spacer, Flex, Badge, useToast, ScrollView, View } from "native-base";
 import { AuthContext } from "../../service/AuthContext";
 import { API_URL } from "@env";
 
-export default function Index({ navigation ,route}) {
+export default function Index({ navigation, route }) {
     const { userId, userToken, userNombres } = useContext(AuthContext);
     const [refreshing, setRefreshing] = useState(false);
     const toast = useToast();
@@ -26,7 +26,7 @@ export default function Index({ navigation ,route}) {
                 })
             });
             const result = await res.json();
-
+            console.log(result)
             if (result.data) {
                 setdata(result.data)
 
@@ -34,8 +34,9 @@ export default function Index({ navigation ,route}) {
 
         } catch (error) {
             toast.show({ 'description': error.toString() })
+            console.log(error.toString())
         } finally {
-            
+
             setRefreshing(false)
         }
     }
@@ -44,16 +45,16 @@ export default function Index({ navigation ,route}) {
     useEffect(() => {
         acceder();
         // actualizar listado
-        if(route.params?.estado){
+        if (route.params?.estado) {
             acceder();
         }
     }, [route.params?.estado])
-    
+
     return (
         <ScrollView refreshControl={
-            <RefreshControl 
-            refreshing={refreshing}
-            onRefresh={acceder}/>
+            <RefreshControl
+                refreshing={refreshing}
+                onRefresh={acceder} />
         } >
             <View px={"3"}>
 
@@ -75,7 +76,7 @@ export default function Index({ navigation ,route}) {
                             </View>
                             {
                                 data.map((e) => {
-                                    
+
                                     return (
                                         <Pressable key={e.id} my={1} onPress={
                                             () => {
@@ -85,7 +86,7 @@ export default function Index({ navigation ,route}) {
                                                     case "Presentación":
                                                         pantalla = "Presentacion"
                                                         break;
-                                                  
+
                                                     default:
                                                         pantalla = "Contestacion"
                                                         break;
@@ -98,7 +99,7 @@ export default function Index({ navigation ,route}) {
                                                 isHovered,
                                                 isPressed
                                             }) => {
-                                                return <Box borderColor="coolGray.300" shadow="3" bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : e.estado=='Respondida'?'success.50':'warning.50'} p="3" rounded="8" style={{
+                                                return <Box borderColor="coolGray.300" shadow="3" bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : e.estado == 'Respondida' ? 'success.50' : 'warning.50'} p="3" rounded="8" style={{
                                                     transform: [{
                                                         scale: isPressed ? 0.96 : 1
                                                     }]
@@ -110,7 +111,7 @@ export default function Index({ navigation ,route}) {
                                                             TIPO DE CARTA
                                                         </Text>
                                                         <Spacer />
-                                                        <Badge colorScheme={e.estado=='Respondida'?'success':'warning'} _text={{
+                                                        <Badge colorScheme={e.estado == 'Respondida' ? 'success' : 'warning'} _text={{
                                                             color: "white"
                                                         }} variant="solid" rounded="4">
                                                             {e.tipo_carta_nombre}
@@ -124,14 +125,10 @@ export default function Index({ navigation ,route}) {
                                                     </Text>
                                                     <Flex>
                                                         <HStack space={"1"}>
-                                                        {
-                                                            e.estado=='Respondida'?<CheckIcon size="4" mt="0.5" color="success.700" />:<WarningTwoIcon size="4" mt="0.5" color="yellow.600" />
-                                                        }
-                                                        
-
-                                                        <Text fontSize={12} fontWeight="medium" color={e.estado=='Respondida'?'success.700':'yellow.600'}>
-                                                        {e.estado=='Respondida'?'Respondida':'Pendiente'}
-                                                        </Text>
+                                                           
+                                                            <Text fontSize={12} fontWeight="medium" color={e.estado == 'Respondida' ? 'success.700' : 'yellow.600'}>
+                                                                {e.estado == 'Respondida' ? 'Respondida' : 'Pendiente'}
+                                                            </Text>
                                                         </HStack>
                                                     </Flex>
                                                 </Box>;
